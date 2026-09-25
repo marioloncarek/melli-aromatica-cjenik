@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="hr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cjenik – Melli Aromatica</title>
+<style>
+  :root { color-scheme: light dark; --fg:#1a1a1a; --muted:#666; --line:#ddd; --bg:#fff; --link:#0b5cad; }
+  @media (prefers-color-scheme: dark) {
+    :root { --fg:#eee; --muted:#aaa; --line:#444; --bg:#141414; --link:#6cb4ff; }
+  }
+  body { margin:0; background:var(--bg); color:var(--fg);
+         font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  main { max-width:860px; margin:0 auto; padding:24px 16px 48px; }
+  h1 { font-size:1.6rem; margin:0 0 12px; }
+  h2 { font-size:1.2rem; margin:32px 0 8px; }
+  a { color:var(--link); }
+  .trader { border:1px solid var(--line); border-radius:8px; padding:12px 16px; }
+  .trader p { margin:2px 0; }
+  .current { font-size:1.1rem; }
+  .muted { color:var(--muted); font-size:.9rem; }
+  .table-wrap { overflow-x:auto; }
+  table { border-collapse:collapse; width:100%; font-size:.95rem; }
+  th, td { text-align:left; padding:6px 8px; border-bottom:1px solid var(--line); white-space:nowrap; }
+</style>
+</head>
+<body>
+<main>
+<h1>Cjenik proizvoda – Melli Aromatica</h1>
+<div class="trader">
+<p><strong>MELLI AROMATICA d.o.o.</strong></p><p>OIB: 01735857113</p><p>Adresa: Ljudevita Šmidhena 1a, 10430 Samobor</p><p>Oznaka poslovnog prostora: TEST</p><p>Internetska trgovina: <a href="https://www.melliaromatica.com">https://www.melliaromatica.com</a></p>
+</div>
+<p>Cjenici su objavljeni u strojno čitljivom obliku (.csv i .xml) sukladno Odluci o objavi cjenika
+proizvoda i usluga kao mjeri izravne kontrole cijena (NN 101/2026). Cjenik se objavljuje svaki dan
+prije 8:00 sati, a objavljeni cjenici dostupni su najmanje 30 dana od dana objave.</p>
+<p class="current">Trenutni cjenik (25. 9. 2026. u 18:52, 16 stavki): <a href="latest.csv">CSV</a> · <a href="latest.xml">XML</a></p>
+<h2>Objavljeni cjenici</h2>
+<div class="table-wrap">
+<table><thead><tr><th>Datum</th><th>Vrijeme</th><th>Broj pohrane</th><th>Broj stavki</th><th>Datoteke</th></tr></thead>
+<tbody>
+<tr><td>25. 9. 2026.</td><td>18:52</td><td>1</td><td>16</td><td><a href="files/internetska-trgovina_Ljudevita-Smidhena-1a-10430-Samobor_TEST_1_25.09.2026_18.52.csv">CSV</a> · <a href="files/internetska-trgovina_Ljudevita-Smidhena-1a-10430-Samobor_TEST_1_25.09.2026_18.52.xml">XML</a></td></tr>
+</tbody></table>
+</div>
+<h2>Format</h2>
+<p>CSV: UTF-8, separator točka-zarez (;), decimalni zarez. XML: UTF-8, decimalna točka.
+Stupci: naziv, sifra, marka, jedinica_mjere, cijena_za_jedinicu_mjere, maloprodajna_cijena, posebni_oblik_prodaje, naziv_posebnog_oblika_prodaje, sidrena_cijena, barkod, dostupnost. Strojni popis svih datoteka: <a href="manifest.json">manifest.json</a>.</p>
+<p class="muted">Zadnje ažuriranje: 25. 9. 2026. u 18:52.</p>
+</main>
+</body>
+</html>
