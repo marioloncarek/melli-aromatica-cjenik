@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.DS_Store
+*.swp
+# local audit files (repository root only; tests/fixtures must stay tracked)
+/audit.csv
+/products_export*.csv

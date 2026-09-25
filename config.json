@@ -1,0 +1,18 @@
+{
+  "_readme": "The ONLY file you edit per store. Every key is explained in README.md, section 'Configuration reference'. Keys starting with _ are comments and are ignored.",
+
+  "store_name": "CHANGE_ME Store name",
+  "company_name": "CHANGE_ME Company d.o.o.",
+  "company_oib": "",
+  "domain": "www.CHANGE_ME.hr",
+  "address": "CHANGE_ME Ulica 1, 10000 Zagreb",
+  "premises_label": "CHANGE_ME",
+  "first_day": "2026-10-01",
+
+  "form_of_sale": "internetska-trgovina",
+  "keep_days": 60,
+  "max_row_drop_percent": 50,
+  "fail_on_missing_anchor": false,
+  "require_taxes_included": true,
+  "csv_bom": false
+}

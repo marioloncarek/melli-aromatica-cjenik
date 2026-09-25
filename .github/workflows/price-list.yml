@@ -1,0 +1,84 @@
+# Publishes the daily price list (cjenik) to GitHub Pages.
+# Nothing in this file changes per store: store settings live in config.json.
+name: Price list
+
+on:
+  schedule:
+    # GitHub cron runs in UTC. Zagreb is UTC+2 in summer (CEST) and UTC+1 in winter (CET).
+    # GitHub may start scheduled runs late (or skip one) at busy times, so there are three backups.
+    # A backup run does nothing if the price list for today is already published.
+    # All four runs are before 08:00 Zagreb time in summer and in winter.
+    - cron: "17 2 * * *"   # main run:      04:17 summer / 03:17 winter (Zagreb)
+    - cron: "47 3 * * *"   # backup 1:      05:47 summer / 04:47 winter
+    - cron: "37 4 * * *"   # backup 2:      06:37 summer / 05:37 winter
+    - cron: "17 5 * * *"   # backup 3:      07:17 summer / 06:17 winter
+  workflow_dispatch:
+    inputs:
+      force:
+        description: "Rebuild today's price list even if it is already published (also skips the row-drop guard)"
+        type: boolean
+        default: false
+      reset_archive:
+        description: "Delete ALL previously published price lists first. Use ONCE when going live after testing."
+        type: boolean
+        default: false
+      dry_run:
+        description: "Only fetch and check the price list. Publish nothing."
+        type: boolean
+        default: false
+
+permissions:
+  contents: write   # commit the published files (the archive lives in the repository)
+  pages: write      # deploy to GitHub Pages
+  id-token: write   # required by actions/deploy-pages
+
+concurrency:
+  group: price-list
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+
+      - name: Build price list
+        env:
+          FORCE: ${{ inputs.force && '--force' || '' }}
+          RESET: ${{ inputs.reset_archive && '--reset-archive' || '' }}
+          DRY_RUN: ${{ inputs.dry_run && '--dry-run' || '' }}
+        run: python3 scripts/build_price_list.py --config config.json --site-dir site $FORCE $RESET $DRY_RUN
+
+      - name: Save to repository
+        if: ${{ !inputs.dry_run }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A site
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "Price list $(TZ=Europe/Zagreb date +'%d.%m.%Y %H:%M')"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+
+      - name: Configure GitHub Pages
+        if: ${{ !inputs.dry_run }}
+        uses: actions/configure-pages@v6
+
+      - name: Upload site
+        if: ${{ !inputs.dry_run }}
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: site
+
+      - name: Deploy to GitHub Pages
+        if: ${{ !inputs.dry_run }}
+        id: deployment
+        uses: actions/deploy-pages@v5

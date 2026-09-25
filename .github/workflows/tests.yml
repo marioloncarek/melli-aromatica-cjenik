@@ -1,0 +1,25 @@
+# Runs the kit's automated tests whenever the code changes (not on the daily price list commits).
+name: Tests
+
+on:
+  push:
+    paths:
+      - "scripts/**"
+      - "tests/**"
+      - ".github/workflows/**"
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+
+      - name: Run tests
+        run: python3 -m unittest discover -s tests -v

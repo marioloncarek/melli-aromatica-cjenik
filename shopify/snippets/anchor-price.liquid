@@ -1,0 +1,93 @@
+{%- comment -%}
+  snippets/anchor-price.liquid
+  Croatian "sidrena cijena" (dodatna cijena, NN 101/2026-1212), shown next to a retail price.
+  Reads variant metafields pricing.anchor_price (money) and pricing.anchor_price_date (date).
+
+  Params:
+    variant      (required) variant whose anchor price is shown (the lower end, if a range)
+    variant_max  (optional) variant at the upper end of a price range (cards showing "min – max")
+    from         (optional, boolean) true when the adjacent price is a "from" price ("od 9,50 €")
+    money_format (optional) 'money' (default) | 'money_with_currency' | 'money_without_trailing_zeros'.
+                 MUST match the filter used for the adjacent retail price.
+    class        (optional) extra CSS classes
+
+  Renders nothing when: the setting is off, the variant is blank, the product is a gift card,
+  or the variant has no anchor price.
+
+  Usage:
+    Product page: {% render 'anchor-price', variant: product.selected_or_first_available_variant %}
+    Card, single: {% render 'anchor-price', variant: card_variant %}
+    Card, from:   {% render 'anchor-price', variant: min_variant, from: true %}
+    Card, range:  {% render 'anchor-price', variant: min_variant, variant_max: max_variant %}
+{%- endcomment -%}
+
+{%- liquid
+  assign show = false
+  if settings.show_anchor_price != false and variant != blank and variant.product.gift_card? != true
+    assign anchor = variant.metafields.pricing.anchor_price.value
+    if anchor != blank
+      assign show = true
+    endif
+  endif
+
+  if show
+    # Fallback only if the price was entered by hand without a date. 2026-09-10 is the legal reference date.
+    assign anchor_date = variant.metafields.pricing.anchor_price_date.value | default: '2026-09-10'
+    assign date_label = anchor_date | date: '%-d. %-m. %Y.'
+
+    assign is_range = false
+    assign show_from = false
+    if from == true
+      assign show_from = true
+    endif
+
+    if variant_max != blank and variant_max.id != variant.id
+      assign anchor_max = variant_max.metafields.pricing.anchor_price.value
+      assign date_max = variant_max.metafields.pricing.anchor_price_date.value | default: '2026-09-10'
+      # A range is only honest if both ends have an anchor price and share the same date; otherwise fall back to "from".
+      if anchor_max != blank and date_max == anchor_date
+        assign is_range = true
+      else
+        assign show_from = true
+      endif
+    endif
+
+    case money_format
+      when 'money_with_currency'
+        assign amount = anchor | money_with_currency
+        if is_range
+          assign amount_max = anchor_max | money_with_currency
+        endif
+      when 'money_without_trailing_zeros'
+        assign amount = anchor | money_without_trailing_zeros
+        if is_range
+          assign amount_max = anchor_max | money_without_trailing_zeros
+        endif
+      else
+        assign amount = anchor | money
+        if is_range
+          assign amount_max = anchor_max | money
+        endif
+    endcase
+
+    assign css_class = 'anchor-price'
+    if class != blank
+      assign css_class = css_class | append: ' ' | append: class
+    endif
+  endif
+-%}
+
+{%- if show -%}
+  <p class="{{ css_class }}" data-anchor-price>
+    <span class="anchor-price__label">{{ 'products.product.anchor_price.label' | t: date: date_label }}</span>
+    <span class="anchor-price__value">
+      {%- if is_range -%}
+        {{ amount }} – {{ amount_max }}
+      {%- elsif show_from -%}
+        {{ 'products.product.anchor_price.from' | t }} {{ amount }}
+      {%- else -%}
+        {{ amount }}
+      {%- endif -%}
+    </span>
+  </p>
+{%- endif -%}
