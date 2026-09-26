@@ -1,7 +1,7 @@
 {
   "store": "Melli Aromatica",
   "generator": "shopify-price-list-csv-xml-template 1.1.0",
-  "updated_at": "2026-09-25T18:52:00+02:00",
+  "updated_at": "2026-09-26T09:44:00+02:00",
   "keep_days": 60,
   "columns": [
     "naziv",
@@ -17,6 +17,17 @@
     "dostupnost"
   ],
   "entries": [
+    {
+      "number": 2,
+      "date": "2026-09-26",
+      "time": "09:44",
+      "csv": "files/internetska-trgovina_Ljudevita-Smidhena-1a-10430-Samobor_TEST_2_26.09.2026_09.44.csv",
+      "xml": "files/internetska-trgovina_Ljudevita-Smidhena-1a-10430-Samobor_TEST_2_26.09.2026_09.44.xml",
+      "rows": 16,
+      "on_sale": 9,
+      "sha256_csv": "db234a3777d8934b8c803e95e74f2736312ebd24b9e81260b64318372cf66f6c",
+      "sha256_xml": "bc8d36894559f184c557a22d0bbaef1b71ba3f069793733f80cc6b3f85fd0f12"
+    },
     {
       "number": 1,
       "date": "2026-09-25",

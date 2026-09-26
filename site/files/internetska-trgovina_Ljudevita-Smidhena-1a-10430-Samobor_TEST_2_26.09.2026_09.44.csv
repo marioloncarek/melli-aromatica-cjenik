@@ -1,0 +1,17 @@
+naziv;sifra;marka;jedinica_mjere;cijena_za_jedinicu_mjere;maloprodajna_cijena;posebni_oblik_prodaje;naziv_posebnog_oblika_prodaje;sidrena_cijena;barkod;dostupnost
+"BIJELA GLINA sapun";"011";"Melli Aromatica";"";;6,50;NE;"";6,50;"";dostupno
+"ZELENA GLINA sapun";"012";"Melli Aromatica";"";;6,50;NE;"";6,50;"";dostupno
+"SVEA krema za lice s hijaluronskom kiselinom 50 ml";"015";"Melli Aromatica";"";;30,00;NE;"";30,00;"";dostupno
+"LILI sapun";"013";"Melli Aromatica";"";;6,00;NE;"";6,00;"";dostupno
+"ISLA hijaluronski serum sa snagom bakra 30ml";"014";"Melli Aromatica";"";;44,00;NE;"";44,00;"";dostupno
+"Hijaluronski set za njegu lica";"016";"Melli Aromatica";"";;62,00;DA;"Akcija";74,00;"";dostupno
+"EKO koncentrirani omekšivač za rublje, 500 ML";"002";"Melli Aromatica";"";;7,60;DA;"Akcija";9,50;"";dostupno
+"EKO koncentrirani deterdžent za rublje, 1 L";"001";"Melli Aromatica";"";;11,50;NE;"";11,50;"";nedostupno
+"EKO duo za njegu rublja";"008";"Melli Aromatica";"";;20,00;DA;"Akcija";21,00;"";nedostupno
+"EKO sojina svijeća pamuk, 220 ML";"004";"Melli Aromatica";"";;21,00;NE;"";21,00;"";nedostupno
+"EKO osvježivač rublja, tekstila i prostora, 250 ML";"003";"Melli Aromatica";"";;7,60;DA;"Akcija";9,50;"";dostupno
+"EKO paket";"009";"Melli Aromatica";"";;29,50;DA;"Akcija";30,50;"";nedostupno
+"EKO koncentrirani deterdžent za rublje, 3 L";"112";"Melli Aromatica";"";;29,50;DA;"Akcija";34,50;"";nedostupno
+"6 x EKO koncentrirani deterdžent za rublje, 1 L";"115";"Melli Aromatica";"";;57,50;DA;"Akcija";69,00;"";nedostupno
+"6 x EKO osvježivač rublja, tekstila i prostora, 250 ML";"116";"Melli Aromatica";"";;47,50;DA;"Akcija";57,00;"";nedostupno
+"EKO koncentrirani omekšivač za rublje, 1 L";"121";"Melli Aromatica";"";;13,20;DA;"Akcija";16,50;"";dostupno
